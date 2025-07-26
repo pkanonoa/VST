@@ -1,0 +1,42 @@
+{
+  "name": "rental-expense-manager",
+  "version": "1.0.0",
+  "description": "A desktop application for managing rental properties, utility bills, and expenses",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run serve\" \"wait-on http://localhost:8080 && electron .\"",
+    "build": "cd frontend && npm run build && cd ../backend && npm run build",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.rentalexpensemanager.app",
+    "productName": "Rental & Expense Manager",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "frontend/dist/**/*",
+      "backend/**/*",
+      "!backend/node_modules/**/*",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/*.d.ts",
+      "!**/node_modules/.bin"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "frontend/public/icon.ico"
+    }
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "electron": "^22.0.0",
+    "electron-builder": "^23.6.0",
+    "wait-on": "^7.0.1"
+  }
+}
